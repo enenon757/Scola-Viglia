@@ -84,27 +84,29 @@
         }
         
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 20px;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s forwards 0.3s;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             max-width: 700px;
             margin: 0 auto 30px;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s forwards 0.6s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 30px;
+            padding: 15px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
@@ -112,11 +114,15 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s forwards 0.9s;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
         }
         
         .btn:hover {
             background-color: #8aab6d;
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         section {
@@ -138,6 +144,19 @@
             margin-bottom: 40px;
             color: var(--primary-color);
             text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
         }
         
         h3 {
@@ -148,13 +167,14 @@
         
         p {
             margin-bottom: 20px;
+            font-size: 1.1rem;
         }
         
         .image-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
+            gap: 30px;
+            margin: 50px 0;
         }
         
         .image-grid img {
@@ -176,6 +196,7 @@
             border-collapse: collapse;
             margin: 30px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
         }
         
         .price-table th, .price-table td {
@@ -196,16 +217,21 @@
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 500;
+            color: var(--primary-color);
         }
         
         .form-group input, .form-group textarea {
@@ -214,36 +240,47 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
         }
         
         .form-group textarea {
             height: 150px;
+            resize: vertical;
         }
         
         footer {
             background-color: var(--primary-color);
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
+            margin-top: 50px;
         }
         
         footer p {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
         
         .social-links {
-            margin-top: 20px;
+            margin: 25px 0;
         }
         
         .social-links a {
             color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
+            margin: 0 15px;
+            font-size: 1.8rem;
             transition: opacity 0.3s;
+            display: inline-block;
         }
         
         .social-links a:hover {
             opacity: 0.8;
+            transform: translateY(-3px);
         }
         
         @keyframes fadeInUp {
@@ -264,7 +301,11 @@
             }
             
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
             }
             
             section {
@@ -273,6 +314,11 @@
             
             h2 {
                 font-size: 2rem;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
         }
     </style>
@@ -300,74 +346,228 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Willkommen in der Scola Vigla</h1>
-            <p>Das historische Schulhaus von Salouf - Ihre Gruppenunterkunft im Herzen von Graubünden</p>
+            <h1>Scola Vigla</h1>
+            <p>Historisches Gruppenhaus in Salouf - Ihr Bergidyll in Graubünden</p>
             <a href="#kontakt" class="btn">Jetzt anfragen</a>
         </div>
     </section>
 
     <section id="home-content">
         <h2>Unser Haus</h2>
-        <p>Die <strong>Scola Vigla</strong> – einst das Schulhaus von Salouf – verbindet historischen Charme mit modernem Komfort. Seit Generationen ist dieses besondere Haus ein Ort der Begegnung:</p>
+        <p>Die Scola Vigla – einst das Schulhaus von Salouf – verbindet historischen Charme mit modernem Komfort. Seit Generationen ist dieses besondere Haus ein Ort der Begegnung in den Bündner Bergen.</p>
         
         <div class="image-grid">
-            <img src="img/haus-aussen.jpg" alt="Historische Fassade der Scola Vigla">
-            <img src="img/wohnbereich.jpg" alt="Gemütlicher Wohnbereich">
-            <img src="img/gemeinschaftsraum.jpg" alt="Gemeinschaftsraum">
+            <img src="img/haus-aussen.jpg" alt="Historische Fassade der Scola Vigla mit Bergpanorama">
+            <img src="img/wohnbereich.jpg" alt="Gemütlicher Wohnbereich mit Holzbalken">
+            <img src="img/gemeinschaftsraum.jpg" alt="Heller Gemeinschaftsraum mit Tischen">
         </div>
 
-        <p>Unser Haus bietet:</p>
+        <p>Unser Gruppenhaus bietet Ihnen:</p>
         <ul>
-            <li>Gemütliche Gruppenunterkunft mit 22 Betten</li>
-            <li>Voll ausgestattete Küche mit modernen Geräten</li>
-            <li>Gemeinschaftsbereiche zum Entspannen und Zusammensein</li>
-            <li>Ideale Lage direkt im Dorfzentrum von Salouf</li>
+            <li>Authentische Atmosphäre in historischen Mauern</li>
+            <li>Moderne Ausstattung für entspannte Aufenthalte</li>
+            <li>Ideale Lage für Bergaktivitäten und Dorfleben</li>
+            <li>Flexible Nutzung für Gruppen aller Art</li>
         </ul>
     </section>
 
     <section id="salouf">
         <h2>Salouf</h2>
-        <p><strong>Salouf (1'258 ü. M.)</strong> liegt in der Nähe von <strong>Savognin</strong> auf einer Terrasse am Ostabhang des Piz Toissa (2657 m) links über dem Talgrund der Julia.</p>
+        <p>Unser Bergdorf Salouf liegt auf 1'258 Meter über Meer und besticht durch seine ursprüngliche Walserarchitektur und atemberaubende Bergkulisse.</p>
         
         <div class="image-grid">
-            <img src="img/salouf-dorf.jpg" alt="Dorf Salouf">
-            <img src="img/landschaft.jpg" alt="Berglandschaft um Salouf">
-            <img src="img/kirche.jpg" alt="Kirche St. Georg">
+            <img src="img/salouf-dorf.jpg" alt="Blick auf das Dorf Salouf mit Holzhäusern">
+            <img src="img/landschaft.jpg" alt="Bergpanorama rund um Salouf">
+            <img src="img/kirche.jpg" alt="Historische Kirche St. Georg">
         </div>
+
+        <h3>Besonderheiten</h3>
+        <ul>
+            <li>Traditionelle Walserhäuser aus dem 13. Jahrhundert</li>
+            <li>Wallfahrtskirche Ziteil - höchstgelegenes Gotteshaus Europas</li>
+            <li>Ehemaliges Kapuzinerhospiz im Dorfzentrum</li>
+            <li>Alte Mühle im Weiler Mulegn</li>
+        </ul>
     </section>
 
     <section id="standort">
         <h2>Standort</h2>
-        <p><strong>Veia Principala 42, 7462 Salouf</strong></p>
+        <p><strong>Adresse:</strong> Veia Principala 42, 7462 Salouf</p>
         
         <div class="image-grid">
-            <img src="img/lage.jpg" alt="Lage des Hauses">
-            <img src="img/spielplatz.jpg" alt="Spielplatz in der Nähe">
+            <img src="img/lage.jpg" alt="Lage des Hauses im Dorfzentrum">
+            <img src="img/spielplatz.jpg" alt="Spielplatz gegenüber dem Haus">
             <img src="img/skilift.jpg" alt="Kinderskilift im Winter">
         </div>
+
+        <h3>In der Nähe</h3>
+        <ul>
+            <li>Fussballplatz und Allwetterplatz direkt gegenüber</li>
+            <li>Kinderspielplatz in 2 Gehminuten</li>
+            <li>Gratis-Kinderskilift im Winter</li>
+            <li>Turnhalle zur Miete bei schlechtem Wetter</li>
+        </ul>
     </section>
 
     <section id="raumangebot">
         <h2>Raumangebot</h2>
-        <p>Unser Haus verfügt über:</p>
+        <p>Unser Haus bietet Platz für bis zu 22 Personen in gemütlich eingerichteten Räumen.</p>
         
         <div class="image-grid">
-            <img src="img/schlafzimmer.jpg" alt="Schlafzimmer">
-            <img src="img/kueche.jpg" alt="Moderne Küche">
-            <img src="img/badezimmer.jpg" alt="Badezimmer">
+            <img src="img/schlafzimmer.jpg" alt="Gemütliches Schlafzimmer mit Holzbetten">
+            <img src="img/kueche.jpg" alt="Moderne Küche mit Essbereich">
+            <img src="img/badezimmer.jpg" alt="Helles Badezimmer mit Dusche">
+        </div>
+
+        <h3>Ausstattung</h3>
+        <ul>
+            <li>5 Schlafzimmer (2x5 und 3x4 Betten)</li>
+            <li>Gemeinschafts- und Essbereich</li>
+            <li>Moderne Küche mit Geschirrspüler und Kaffeemaschine</li>
+            <li>Badezimmer mit 3 Duschen und 2 WCs</li>
+            <li>Separates WC im Zwischenstock</li>
+            <li>Waschmaschine für Gäste</li>
+        </ul>
+    </section>
+
+    <section id="erreichbarkeit">
+        <h2>Erreichbarkeit</h2>
+        
+        <h3>Mit öffentlichem Verkehr</h3>
+        <ul>
+            <li>Bahn bis Tiefencastel</li>
+            <li>Postauto bis Salouf (2 Gehminuten zum Haus)</li>
+        </ul>
+        
+        <h3>Mit dem Auto</h3>
+        <ul>
+            <li>Zufahrt bis zum Haus möglich</li>
+            <li>Parkplätze 30 m nördlich vom Gruppenhaus</li>
+        </ul>
+    </section>
+
+    <section id="preise">
+        <h2>Preise</h2>
+        
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Zeitraum</th>
+                    <th>10-15 Personen (CHF/Nacht)</th>
+                    <th>16-22 Personen (CHF/Nacht)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Weihnachtsferien</td>
+                    <td>26.00</td>
+                    <td>25.00</td>
+                </tr>
+                <tr>
+                    <td>Januar bis März</td>
+                    <td>24.00</td>
+                    <td>23.00</td>
+                </tr>
+                <tr>
+                    <td>April bis Dezember</td>
+                    <td>23.00</td>
+                    <td>22.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Weitere Kosten</h3>
+        <ul>
+            <li>Bettwäsche: CHF 15.00 pro Person (obligatorisch)</li>
+            <li>Endreinigung: CHF 200-250 (je nach Gruppengrösse)</li>
+            <li>Kurtaxen und WLAN inklusive</li>
+        </ul>
+    </section>
+
+    <section id="gaestekarte">
+        <h2>Gästekarte</h2>
+        <p>Alle Gäste erhalten die Gästekarte der Ferienregion Savognin Bivio Albula mit vielen Vorteilen:</p>
+        <ul>
+            <li>Gratis-Fahrten mit dem Postauto in der Region</li>
+            <li>Kostenlose Bergbahnen im Sommer</li>
+            <li>Vergünstigungen bei Sehenswürdigkeiten und Aktivitäten</li>
+        </ul>
+        <p>Mehr Informationen unter: <a href="https://www.valsurses.ch" target="_blank">www.valsurses.ch</a></p>
+    </section>
+
+    <section id="umgebung">
+        <h2>Umgebung</h2>
+        
+        <h3>Savognin (4 km entfernt)</h3>
+        <ul>
+            <li>Bergbahnen mit Sommerbetrieb</li>
+            <li>Badesee Lai Barnagn mit Minigolf</li>
+            <li>Kunsteisbahn und Skigebiet für Kinder</li>
+        </ul>
+        
+        <h3>Riom (2 km entfernt)</h3>
+        <ul>
+            <li>Burg Riom aus dem 13. Jahrhundert</li>
+            <li>Origen Festival Cultural</li>
+        </ul>
+        
+        <h3>Parc Ela</h3>
+        <p>Grösster Naturpark der Schweiz mit vielfältigen Wander- und Naturerlebnissen.</p>
+    </section>
+
+    <section id="belegungsplan">
+        <h2>Belegungsplan</h2>
+        <p>Unser aktueller Belegungsplan zeigt die verfügbaren Termine für Ihr Bergabenteuer.</p>
+        <!-- Hier könnte ein Kalender-Widget eingebunden werden -->
+        <div style="background-color: #f5f5f5; padding: 30px; border-radius: 8px; text-align: center;">
+            <p style="color: var(--primary-color); font-weight: 500;">Belegungsplan wird in Kürze eingebunden</p>
         </div>
     </section>
 
-    <!-- Weitere Abschnitte (Preise, Kontakt etc.) -->
+    <section id="kontakt">
+        <h2>Kontakt</h2>
+        
+        <div class="contact-form">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Ihre Nachricht</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Nachricht senden</button>
+            </form>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center;">
+            <h3>Kontaktdaten</h3>
+            <p><strong>Viviane Dürr</strong><br>
+            +41 78 794 35 17</p>
+            <p><strong>Seline Dörig-Dürr</strong><br>
+            +41 79 861 32 22</p>
+            <p>scolaviglia@gmail.com</p>
+        </div>
+    </section>
 
     <footer>
-        <p>Scola Vigla - Veia Principala 42, 7462 Salouf</p>
-        <p>Tel: +41 78 794 35 17 | Email: scolaviglia@gmail.com</p>
+        <div class="logo" style="color: white; font-size: 28px; margin-bottom: 20px;">Scola Vigla</div>
+        <p>Veia Principala 42, 7462 Salouf, Graubünden</p>
         <div class="social-links">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>&copy; 2023 Scola Vigla. Alle Rechte vorbehalten.</p>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Scola Vigla. Alle Rechte vorbehalten.</p>
     </footer>
 
     <script>
@@ -406,6 +606,9 @@
                 header.style.padding = '15px 0';
             }
         });
+        
+        // Automatisches Jahr im Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
     
     <!-- Font Awesome für Icons -->
