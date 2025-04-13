@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scola Vigla - Gruppenhaus Salouf</title>
+    <style>
+        :root {
+            --primary-color: #6b8e23; /* Olive green */
+            --secondary-color: #f8f8f8;
+            --text-color: #333;
+            --light-text: #777;
+            --transition-time: 0.5s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1519865885898-a54a6f2c7eea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+        
+        .btn:hover {
+            background-color: #5a7a1e;
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--primary-color);
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .image-grid img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: var(--secondary-color);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 80px 20px;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Scola Vigla</div>
+            <nav>
+                <ul>
+                    <li><a href="#start">Start</a></li>
+                    <li><a href="#salouf">Salouf</a></li>
+                    <li><a href="#standort">Standort</a></li>
+                    <li><a href="#raumangebot">Raumangebot</a></li>
+                    <li><a href="#erreichbarkeit">Erreichbarkeit</a></li>
+                    <li><a href="#preise">Preise</a></li>
+                    <li><a href="#gaestekarte">Gästekarte</a></li>
+                    <li><a href="#umgebung">Umgebung</a></li>
+                    <li><a href="#belegungsplan">Belegungsplan</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="start" class="hero">
+        <div class="hero-content">
+            <h1>Willkommen in der Scola Vigla</h1>
+            <p>Das historische Schulhaus von Salouf - Ihre Gruppenunterkunft im Herzen von Graubünden</p>
+            <a href="#kontakt" class="btn">Jetzt anfragen</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>Über uns</h2>
+        <p>Wir begrüssen Sie herzlich auf unserer Webseite und freuen uns an Ihrem Interesse für die "Scola viglia" in Salouf.</p>
+        <p>Das alte Schulhaus von Salouf wurde gegen Ende des 19. Jahrhunderts erstellt. Das Gebäude diente bis in die Sechzigerjahre des letzten Jahrhunderts als Schulhaus, nachher für einige Jahre als Truppenunterkunft und schliesslich bis heute als Gruppenunterkunft mit 22 Betten.</p>
+        <p>Gegenüber der "Scola viglia" befindet sich ein Fussballplatz, ein Allwetterplatz sowie ein Kinderspielplatz. Im Winter wird ein Gratis- Kinderskilift unter dem öffentlichen Parkplatz betrieben.</p>
+        <p>Bei schlechtem Wetter oder auf Wunsch kann tagsüber die nahegelegene Turnhalle von der Gemeinde Salouf gemietet werden. Die Miete beträgt für einen halben Tag CHF 50.00 und für einen ganzen Tag CHF 80.00.</p>
+        
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gruppenhaus">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Schlafzimmer">
+            <img src="https://images.unsplash.com/photo-1582719471386-3a8b0d2c4cac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gemeinschaftsraum">
+        </div>
+    </section>
+
+    <section id="salouf">
+        <h2>Salouf</h2>
+        <p><strong>Salouf (1'258 ü. M.)</strong> liegt in der Nähe von <strong>Savognin</strong> auf einer Terrasse am Ostabhang des Piz Toissa (2657 m) links über dem Talgrund der Julia. Das Dorf mit seinen rund 200 Einwohnern ist geprägt von teils wohnturmartigen Walserhäusern aus dem 13. Jahrhundert sowie durch Stil und Dimensionen beeindruckenden Häusern aus dem 17. und 18. Jahrhundert.</p>
+        <p>Auf Gemeindegebiet von Salouf liegt <strong>Ziteil,</strong> das höchstgelegene Gotteshaus Europas. Die Wallfahrtskirche mit Pilgerhaus liegt auf einer Höhe von 2'429 m ü. M.</p>
+        
+        <h3>Weitere Sehenswürdigkeiten:</h3>
+        <ul>
+            <li>ehemaliges Kapuzinerhospiz im Dorfzentrum</li>
+            <li>alte Mühle im Weiler Mulegn</li>
+            <li>Kirche St. Georg (S.Gieri) aus dem 15. Jahrhundert</li>
+        </ul>
+        
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Salouf Landschaft">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bergdorf">
+            <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kirche">
+        </div>
+    </section>
+
+    <section id="standort">
+        <h2>Standort</h2>
+        <p><strong>Standort: Veia Principala 42, 7462 Salouf</strong></p>
+        
+        <h3>Lage des Hauses</h3>
+        <ul>
+            <li>zentral</li>
+            <li>in den Bergen</li>
+            <li>neben Sport- und Kinderspielplatz</li>
+        </ul>
+        
+        <h3>Einkaufsmöglichkeit</h3>
+        <ul>
+            <li>Dorfladen Prima in Salouf</li>
+            <li>weitere Läden in Savognin</li>
+        </ul>
+        
+        <h3>Gastronomie</h3>
+        <ul>
+            <li>Hotel-Restaurant Alpina im Dorfzentrum</li>
+            <li>diverse Restaurants im nahegelegenen Savognin</li>
+        </ul>
+        
+        <h3>Hauptort Surses</h3>
+        <p>Savognin in 4 km Entfernung</p>
+        
+        <!-- Hier könnte eine Karte eingebettet werden -->
+    </section>
+
+    <section id="raumangebot">
+        <h2>Raumangebot</h2>
+        <p>Das neu renovierte Haus verfügt über 22 Betten in 5 Schlafzimmern (2 x 5, 3 x 4 Betten), einem Wohnraum, einem Essraum, einer Küche mit Spensa sowie einem Badezimmer mit 3 Duschen und 2 Wc's. Ein seperates Wc befindet sich auf dem Zwischenstock. Eine Waschmaschine steht zur Verfügung.</p>
+        <p>Die neue moderne Küche verfügt über zwei Backöfen, Foodcenter, Geschirrwaschmaschine, Kaffeemaschine und Fonduegeschirr für eine grosse Gruppe.</p>
+        
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Schlafzimmer">
+            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Küche">
+            <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Badezimmer">
+        </div>
+    </section>
+
+    <section id="erreichbarkeit">
+        <h2>Erreichbarkeit</h2>
+        
+        <h3>mit öffentlichem Verkehr</h3>
+        <ul>
+            <li>mit der Bahn bis Tiefencastel</li>
+            <li>mit dem Postauto bis Salouf, 2 Gehminuten zum Haus</li>
+        </ul>
+        
+        <h3>mit Auto</h3>
+        <ul>
+            <li>mit dem Auto Zufahrt bis zum Haus</li>
+            <li>Parkplätze 30 m nördlich vom Gruppenhaus entfernt</li>
+        </ul>
+        
+        <p><strong>Adresse:</strong> Veia Principala 42</p>
+    </section>
+
+    <section id="preise">
+        <h2>Preise</h2>
+        <p><strong>Mietpreise für "Scola Viglia" ab 01.01.2025</strong></p>
+        <p><strong>Mindestpersonenzahl:</strong> 8 Personen (über Weihnachten/Neujahr 10 Personen) oder nach Vereinbarung</p>
+        <p><strong>Mindestbelegungsdauer:</strong> 4 Übernachtungen; über Weihnachten und Neujahr mindestens 7 Übernachtungen</p>
+        
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Zeitraum</th>
+                    <th>10-15 Personen (CHF)</th>
+                    <th>16-24 Personen (CHF)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Weihnachtsferien</td>
+                    <td>26.00</td>
+                    <td>25.00</td>
+                </tr>
+                <tr>
+                    <td>Januar bis März</td>
+                    <td>24.00</td>
+                    <td>23.00</td>
+                </tr>
+                <tr>
+                    <td>Rest des Jahres</td>
+                    <td>23.00</td>
+                    <td>22.00</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p><strong>Gruppen von weniger als 8 Personen</strong> nur in der Zwischensaison oder nach Vereinbarung. Der Mindestpreis beträgt pro Aufenthalt mit 4 Übernachtungen CHF 800.00 und pro Aufenthalt mit 5 bis 7 Übernachtungen CHF 1'000.00 (jeweils ohne Bettwäsche und Endreinigung).</p>
+        
+        <p><strong>Bettwäsche pro Person (obligatorisch):</strong> CHF 15.00</p>
+        <p><strong>Schlussreinigung (obligatorisch):</strong></p>
+        <ul>
+            <li>bis 10 Personen (pauschal): CHF 200.00</li>
+            <li>11-22 Personen (pauschal): CHF 250.00</li>
+        </ul>
+        
+        <p><strong>Die Kurtaxen und free wlan sind in den Übernachtungspreisen inbegriffen.</strong></p>
+        
+        <h3>Weitere Kosten</h3>
+        <p>Elektrizität/Heisswasser im Übernachtungsansatz inbegriffen; Zuschlag wegen den stark angestiegenen Energiepreisen: zwischen CHF 70 und CHF 120 je nach Grösse der Gruppe und Saison.</p>
+    </section>
+
+    <section id="gaestekarte">
+        <h2>Gästekarte</h2>
+        <p><strong>Gästekarte = Gratis-Dienstleistungen oder Angebote zu günstigen Konditionen</strong></p>
+        <p>Gäste der Ferienregion Savognin Bivio Albula erhalten von Tourismus Savognin im Surses die Gästekarte, mit welcher Sie etliche Angebote gratis oder zu günstigen Konditionen geniessen können. So ist das Postauto für die Region das ganze Jahr über gratis, die Bergbahnen den ganzen Sommer über.</p>
+        <p>Googlen Sie unter <a href="https://www.valsurses.ch" target="_blank">www.valsurses.ch</a> und lassen Sie sich von den vielen Möglichkeiten inspirieren.</p>
+    </section>
+
+    <section id="umgebung">
+        <h2>Umgebung und Sehenswürdigkeiten</h2>
+        
+        <h3>Savognin</h3>
+        <ul>
+            <li>Hauptort des Oberhalbsteins (Val Surses) in 4 km Entfernung</li>
+            <li>Bergbahnen (mit Gästekarte vom Juni bis Oktober gratis)</li>
+            <li>Pinocchio-Club (für die kleinen Gäste)</li>
+            <li>Badesee Lai Barnagn (mit Minigolfanlage und Pumptrack)</li>
+            <li>Kunsteisbahn und Kinderskiparadies La Nars</li>
+        </ul>
+        
+        <h3>Riom</h3>
+        <ul>
+            <li>Nachbardorf in 2 km Entfernung</li>
+            <li>Burg Riom (aus dem 13. Jahrhundert)</li>
+            <li>Origen Festival Cultural (<a href="https://www.origen.ch/Burg-Riom" target="_blank">www.origen.ch/Burg-Riom</a>)</li>
+            <li>Kulturcafé Carisch</li>
+        </ul>
+        
+        <h3>Parc Ela (<a href="https://www.parcela.ch" target="_blank">www.parcela.ch</a>)</h3>
+        <ul>
+            <li>grösster Naturpark in der Schweiz mit 548 Quadratkilometern</li>
+            <li>vielseitige Passlandschaft von Albula, Julier und Septimer</li>
+            <li>einsame Seitentäler</li>
+        </ul>
+        
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Berglandschaft">
+            <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Burg">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Naturpark">
+        </div>
+    </section>
+
+    <section id="belegungsplan">
+        <h2>Belegungsplan</h2>
+        <p>Hier könnte ein Kalender oder eine Tabelle mit den verfügbaren Terminen eingebunden werden.</p>
+        <!-- Hier könnte ein Kalender-Widget eingebunden werden -->
+    </section>
+
+    <section id="kontakt">
+        <h2>Kontakt</h2>
+        <p><strong>Viviane Dürr</strong><br>
+        Bürglenstrasse 66<br>
+        3006 Bern</p>
+        
+        <p><strong>Seline Dörig-Dürr</strong><br>
+        Rosengärtliweg 1<br>
+        9050 Appenzell<br>
+        <strong>Email:</strong> scolaviglia@gmail.com<br>
+        <strong>Telefon:</strong> Viviane Dürr: +41 78 794 35 17<br>
+        <strong>Telefon:</strong> Seline Dörig-Dürr: +41 79 861 32 22</p>
+        
+        <div class="contact-form">
+            <h3>Schreiben Sie uns</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nachricht</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Nachricht senden</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>Scola Vigla - Veia Principala 42, 7462 Salouf</p>
+        <p>Tel: +41 78 794 35 17 | Email: scolaviglia@gmail.com</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+        <p>&copy; 2023 Scola Vigla. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {threshold: 0.1});
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+            } else {
+                header.style.padding = '15px 0';
+            }
+        });
+    </script>
+    
+    <!-- Font Awesome für Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
